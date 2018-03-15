@@ -12,6 +12,11 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 
+	public Customer(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -34,5 +39,14 @@ public class Customer {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer{" +
+			"id=" + id +
+			", firstName='" + firstName + '\'' +
+			", lastName='" + lastName + '\'' +
+			'}';
 	}
 }
