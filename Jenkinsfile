@@ -9,7 +9,6 @@ pipeline {
             }
             steps {
                 sh 'mvn package'
-                stash name: 'jar', includes: 'target/**.jar'
             }
             post {
                 always {
@@ -21,7 +20,6 @@ pipeline {
             parallel {
                 stage('Integration test') {
                     steps {
-                        unstash 'jar'
                         echo 'Running integration tests'
                     }
                 }
