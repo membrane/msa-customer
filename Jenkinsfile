@@ -9,12 +9,19 @@ pipeline {
             }
             steps {
                 sh 'mvn package'
+                stash name: 'jar', includes: 'target/**.jar'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
             }
         }
         stage('Test') {
             parallel {
                 stage('Integration test') {
                     steps {
+                        unstash 'jar'
                         echo 'Running integration tests'
                     }
                 }
@@ -34,11 +41,6 @@ pipeline {
             steps {
                 echo 'Deploying to prod'
             }
-        }
-    }
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml'
         }
     }
 }
