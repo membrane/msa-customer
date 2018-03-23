@@ -43,7 +43,7 @@ class CustomerServiceTests {
 		assertThat(customerService.getCustomers()).isEqualTo(asList(oliver, thomas));
 	}
 
-	@ParameterizedTest(name = "{index} => id {arguments[0]}")
+	@ParameterizedTest(name = "{index} => ID {0}")
 	@MethodSource("customers")
 	@DisplayName("provides customers by ID")
 	void getCustomerById(Long id, Customer customer) {
