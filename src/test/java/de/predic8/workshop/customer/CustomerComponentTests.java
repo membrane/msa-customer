@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -23,15 +24,15 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @DisplayName("A customer component")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class CustomerComponentTests {
+class CustomerComponentTests {
 	@Autowired
 	private TestRestTemplate testRestTemplate;
-	@Value("${local.server.port}")
+	@LocalServerPort
 	int port;
 
 	@DisplayName("creates new customers")
 	@Test
-	public void createCustomer() {
+	void createCustomer() {
 		ResponseEntity<Void> response = testRestTemplate.postForEntity("/customers", new Customer("Oliver", "Weiler"), Void.class);
 
 		assertThat(response.getHeaders().getLocation()).isEqualTo(URI.create("http://localhost:" + port + "/customers/1"));

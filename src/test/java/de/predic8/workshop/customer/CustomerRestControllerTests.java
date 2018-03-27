@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("A customer controller")
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CustomerRestController.class)
-public class CustomerRestControllerTests {
+class CustomerRestControllerTests {
 	@MockBean
 	private CustomerService customerService;
 	@Autowired
@@ -28,7 +28,7 @@ public class CustomerRestControllerTests {
 
 	@DisplayName("provides the list of customers")
 	@Test
-	public void getCustomers() throws Exception {
+	void getCustomers() throws Exception {
 		Customer oliver = new Customer("Oliver", "Weiler");
 		oliver.setId(1L);
 
